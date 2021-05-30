@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'storeapp.apps.StoreappConfig',
+    'customer.apps.CustomerConfig',
+    'shopkeeper.apps.ShopkeeperConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -73,6 +75,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'storeway.wsgi.application'
 
+AUTH_USER_MODEL = "users.StoreWayUser"
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -81,6 +84,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+
     }
 }
 

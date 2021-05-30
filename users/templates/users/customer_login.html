@@ -15,7 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
   <!-- site metas -->
-  <title>StoreWay - Customer Registration</title>
+  <title>StoreWay - Customer Login</title>
   <meta name="keywords" content="">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -88,7 +88,7 @@
 <div class="text-bg pb-3">
   <center>
     <span>
-      Customer Registration
+      Customer Login
     </span>
     
   </center>
@@ -99,10 +99,13 @@
       {% csrf_token %}
       <fieldset class="form-group">
           <legend class="border-bottom mb-4">
-            Join Today
+            Login
           </legend>
-          {{customer_register_form.as_p}}
-
+          {{customer_login_form.as_p}}
+          <!-- <p>{{customer_login_form.email.lable}}</p>
+          <span>{{customer_login_form.email}}</span>
+          <p>{{customer_login_form.password.lable}}</p>
+          <span>{{customer_login_form.password}}</span> -->
          <!--  <div class='pb-2'>
             {{ form.username.label }}
             {{form.username }}
@@ -135,12 +138,12 @@
           <br> -->
       </fieldset>
       <div class="pl-5 pb-3">
-        <button class="btn btn-outline-info" type="submit">Sign Up</button>
+        <button class="btn btn-outline-info" type="submit">Login</button>
       </div>
     </form>
     <div class="border-top pt-3">
       <small class="text-muted">
-        Already Have An Account? <a class="ml-2" href="/clogin">Sign In</a>
+        Don't Have An Account? <a class="ml-2" href="/cregister">Sign Up</a>
       </small>
     </div>
   </div>

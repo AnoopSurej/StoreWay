@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<!--     <script>
+        var subjectObject = {
+            "Thiruvananthapuram": {
+            "Varkala": ["1", "2", "3", "4"],
+            "Attingal": ["1", "2", "3", "4","5"],
+            "Nedumangad": ["1", "2", "3"]    
+          },
+          
+          "Kollam": {
+            "HTML": ["Links", "Images", "Tables", "Lists"],
+            "CSS": ["Borders", "Margins", "Backgrounds", "Float"],
+            "JavaScript": ["Variables", "Operators", "Functions", "Conditions"]    
+          },
+          "Alappuzha": {
+            "HTML": ["Links", "Images", "Tables", "Lists"],
+            "CSS": ["Borders", "Margins", "Backgrounds", "Float"],
+            "JavaScript": ["Variables", "Operators", "Functions", "Conditions"]    
+          },
+          "Pathanamthitta": {
+            "HTML": ["Links", "Images", "Tables", "Lists"],
+            "CSS": ["Borders", "Margins", "Backgrounds", "Float"],
+            "JavaScript": ["Variables", "Operators", "Functions", "Conditions"]    
+          },
+          "Kottayam": {
+            "HTML": ["Links", "Images", "Tables", "Lists"],
+            "CSS": ["Borders", "Margins", "Backgrounds", "Float"],
+            "JavaScript": ["Variables", "Operators", "Functions", "Conditions"]    
+          },
+          "Idukki": {
+            "HTML": ["Links", "Images", "Tables", "Lists"],
+            "CSS": ["Borders", "Margins", "Backgrounds", "Float"],
+            "JavaScript": ["Variables", "Operators", "Functions", "Conditions"]    
+          },
+          "Ernakulam": {
+            "HTML": ["Links", "Images", "Tables", "Lists"],
+            "CSS": ["Borders", "Margins", "Backgrounds", "Float"],
+            "JavaScript": ["Variables", "Operators", "Functions", "Conditions"]    
+          },
+          "Thrissur": {
+            "HTML": ["Links", "Images", "Tables", "Lists"],
+            "CSS": ["Borders", "Margins", "Backgrounds", "Float"],
+            "JavaScript": ["Variables", "Operators", "Functions", "Conditions"]    
+          },
+          "Palakkad": {
+            "HTML": ["Links", "Images", "Tables", "Lists"],
+            "CSS": ["Borders", "Margins", "Backgrounds", "Float"],
+            "JavaScript": ["Variables", "Operators", "Functions", "Conditions"]    
+          },
+          "Malappuram": {
+            "HTML": ["Links", "Images", "Tables", "Lists"],
+            "CSS": ["Borders", "Margins", "Backgrounds", "Float"],
+            "JavaScript": ["Variables", "Operators", "Functions", "Conditions"]    
+          },
+          "Kozhikode": {
+            "HTML": ["Links", "Images", "Tables", "Lists"],
+            "CSS": ["Borders", "Margins", "Backgrounds", "Float"],
+            "JavaScript": ["Variables", "Operators", "Functions", "Conditions"]    
+          },
+          "Wayanadu": {
+            "HTML": ["Links", "Images", "Tables", "Lists"],
+            "CSS": ["Borders", "Margins", "Backgrounds", "Float"],
+            "JavaScript": ["Variables", "Operators", "Functions", "Conditions"]    
+          },
+          "Kannur": {
+            "HTML": ["Links", "Images", "Tables", "Lists"],
+            "CSS": ["Borders", "Margins", "Backgrounds", "Float"],
+            "JavaScript": ["Variables", "Operators", "Functions", "Conditions"]    
+          },
+          "Kasargod": {
+            "HTML": ["Links", "Images", "Tables", "Lists"],
+            "CSS": ["Borders", "Margins", "Backgrounds", "Float"],
+            "JavaScript": ["Variables", "Operators", "Functions", "Conditions"]    
+          }
+        }
+        window.onload = function() {
+          var subjectSel = document.getElementById("subject");
+          var topicSel = document.getElementById("topic");
+          var chapterSel = document.getElementById("chapter");
+    
+          for (var x in subjectObject) {
+            subjectSel.options[subjectSel.options.length] = new Option(x, x);
+          }
+          subjectSel.onchange = function() {
+            //empty Chapters- and Topics- dropdowns
+            chapterSel.length = 1;
+            topicSel.length = 1;
+            //display correct values
+            for (var y in subjectObject[this.value]) {
+              topicSel.options[topicSel.options.length] = new Option(y, y);
+            }
+          }
+          topicSel.onchange = function() {
+            //empty Chapters dropdown
+            chapterSel.length = 1;
+            //display correct values
+            var z = subjectObject[subjectSel.value][this.value];
+            for (var i = 0; i < z.length; i++) {
+              chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+            }
+          }
+        }
+        </script> -->
+</head>
+<body>
+    <h2 style="margin-left: 50px;">Continue...</h2>
+
+    <form action="/action_page.php" style="margin-left: 50px;">
+        <label for="sname">Shop Name</label>
+        <input type="text" id="sname"><br><br>
+        <label for="stype">Shop Type:</label>
+        <input type="text" id="stype"><br><br>
+        <label for="address">Address:</label><br><br>
+        <textarea id="address" cols="30" rows="4"></textarea><br><br>
+        <label for="district">District</label>
+        <input type="text" id="district"><br><br>
+        <label for="localbody">Local Body</label>
+        <input type="text" id="localbody"><br><br>
+        <label for="wardnum">Ward Number</label>
+        <input type="text" id="wardnum"><br><br>        
+        <!-- District: <select name="subject" id="subject">
+            <option value="" selected="selected">Select district</option>
+          </select>
+          <br><br>
+        Localbody: <select name="topic" id="topic">
+            <option value="" selected="selected">Select Localbody</option>
+          </select>
+          <br><br>
+          Ward number: <select name="chapter" id="chapter">
+            <option value="" selected="selected">Please select wardno </option>
+          </select>
+          <br><br> -->
+          <label for="qsd">Queue Slot Duration:</label>
+          <input type="text" id="qsd"><br><br>
+          <label for="qsc">Queue Slot Capacity:</label>
+          <input type="text" id="qsc"><br><br>
+
+        
+          </select>
+          <br><br>
+
+          <button >Sign Up</button>
+
+</body>
+</html>

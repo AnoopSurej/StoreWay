@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Customer - Dashboard</title>
+</head>
+<body>
+	<h1>Welcome to your Dashboard</h1>
+	<div>
+		{% if user.is_authenticated %}
+    <p>Welcome, {{ user.first_name }} {{ user.last_name }}. Thanks for logging in.</p>
+		{% else %}
+    <p>Welcome, new user. Please log in.</p>
+		{% endif %}
+	</div>
+</body>
+</html>

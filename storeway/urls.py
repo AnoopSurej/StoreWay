@@ -16,9 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from users import views as user_views
+from storeapp import views as storeapp_views
+from customer import views as customer_views
+from shopkeeper import views as shopkeeper_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cregister/', user_views.customer_register, name='customer-register'),
+    path('clogin/', user_views.customer_login, name='customer-login'),
+    path('sregister/', user_views.shopkeeper_register, name='shopkeeper-register'),
+    path('skregnext/', user_views.shopkeeper_register_next, name='shopkeeper-register-next'),
+    path('slogin/', user_views.shopkeeper_login, name='shopkeeper-login'),
+    path('clogout/', user_views.customer_logout, name='customer-logout'),
     path('', include('storeapp.urls')),
+    path('', include('customer.urls')),
+    # path('', include('shopkeeper.urls')),
 ]
