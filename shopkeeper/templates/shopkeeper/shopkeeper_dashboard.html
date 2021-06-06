@@ -66,7 +66,7 @@
                 <div class="limit-box">
                   <nav class="main-menu ">
                     <ul class="menu-area-main">
-                      <li> <a href="/clogout">Log Out</a> </li>
+                      <li> <a href="/slogout">Log Out</a> </li>
                      </ul>
                    </nav>
                  </div>
@@ -87,86 +87,16 @@
      <!-- end header -->
      <h1 style="text-align: center; padding: 10px; font-size: 30px; font-weight: bold;">Dashboard</h1>
 
-     {%if covid %}
-      <div style="text-align: center; padding-bottom: 30px">
-      <h3 style="color: red; text-align: center; font-size: 20px; margin-left: 20%;margin-right: 20%">You were exposed to a COVID-19 Positive Individual when you Shopped at {{shopname}} on {{date|date:'d-m-Y'}}. Please notify the Health department and take necessary precautions</h3>
-      <br>
-      <a href="/confirmalert?shopname={{shopname}}" style="font-size: 20; margin: 0 auto;">Confirm</a>
-      </div>
-     {% endif %}
-
-
      <div class="card text-center" style="background-color: white; margin-left: 600px; margin-right: 600px; margin-top: 50px;">
-       <a href="/cqueue" class="btn btn-primary" style=" font-size: 20px; font-weight: bold;">Queue</a>
+       <a href="/qrscan" class="btn btn-primary" style=" font-size: 20px; font-weight: bold;">Scan</a>
      </div>
      <div class="card text-center" style="background-color: white; margin-left: 600px; margin-right: 600px; margin-top: 50px;">
-       <a href="/csearch" class="btn btn-primary" style=" font-size: 20px; font-weight: bold;">Search</a>
+       <a href="/shopregistry" class="btn btn-primary" style=" font-size: 20px; font-weight: bold;">Registry</a>
+     </div>
+     <div class="card text-center" style="background-color: white; margin-left: 600px; margin-right: 600px; margin-top: 50px;">
+       <a href="/covidalert" class="btn btn-primary" style=" font-size: 20px; font-weight: bold;">COVID-19 Alert</a>
      </div>
 
-
-
-
-<!--        <h1 style="text-align: center;">Stores</h1>
-
-       <div class="row">
-         <div class="col-sm-4">
-           <div class="card" style="margin-left: 15px;">
-             <div class="card-body">
-               <h2 class="card-title" style="text-align: center;">Bakery</h5>
-               
-               <a href="#" class="btn btn-primary"></a>
-             </div>
-           </div>
-         </div>
-         <div class="col-sm-4">
-           <div class="card">
-             <div class="card-body">
-               <h2 class="card-title" style="text-align:center">Restaurant</h5>
-               
-               <a href="#" class="btn btn-primary">Go somewhere</a>
-             </div>
-           </div>
-         </div>
-         <div class="col-sm-4">
-             <div class="card" style="margin-right: 15px;">
-               <div class="card-body">
-                 <h2 class="card-title" style="text-align: center;">Clothing</h5>
-     
-                 <a href="#" class="btn btn-primary">Go somewhere</a>
-               </div>
-             </div>
-           </div>
-       </div>
-
-       <div class="row">
-         <div class="col-sm-4">
-           <div class="card" style="margin-left: 15px;">
-             <div class="card-body">
-               <h2 class="card-title" style="text-align: center;">Electronics</h5>
-               
-               <a href="#" class="btn btn-primary">Go somewhere</a>
-             </div>
-           </div>
-         </div>
-         <div class="col-sm-4">
-           <div class="card">
-             <div class="card-body">
-               <h2 class="card-title" style="text-align:center">Hardware</h5>
-               
-               <a href="#" class="btn btn-primary">Go somewhere</a>
-             </div>
-           </div>
-         </div>
-         <div class="col-sm-4">
-             <div class="card" style="margin-right: 15px;">
-               <div class="card-body">
-                 <h2 class="card-title" style="text-align: center;">Pharmacy</h5>
-     
-                 <a href="#" class="btn btn-primary">Go somewhere</a>
-               </div>
-             </div>
-           </div> -->
-       </div>
 </div>
 </header>
 

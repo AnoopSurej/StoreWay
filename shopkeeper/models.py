@@ -17,3 +17,16 @@ class Shops(models.Model):
 	q_slot_capacity = models.IntegerField()
 	description = models.TextField()
 
+class ShopRegistry(models.Model):
+	shopkeeper_email = models.EmailField()
+	customerFirstName = models.CharField(max_length=20)
+	customerLastName = models.CharField(max_length=20)
+	customerPhone = models.CharField(max_length=10)
+	dateEntry = models.DateTimeField(auto_now=True)
+	queueTimeSlot = models.TimeField()
+	shopEnterTime = models.TimeField(auto_now=True)
+
+class ContainmentZone(models.Model):
+	district = models.CharField(max_length=30)
+	localbody = models.CharField(max_length=30)
+	wardnum = models.IntegerField()

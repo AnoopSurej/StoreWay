@@ -28,7 +28,8 @@ urlpatterns = [
     path('skregnext/', user_views.shopkeeper_register_next, name='shopkeeper-register-next'),
     path('slogin/', user_views.shopkeeper_login, name='shopkeeper-login'),
     path('clogout/', user_views.customer_logout, name='customer-logout'),
+    path('slogout/', user_views.shopkeeper_logout, name='shopkeeper-logout'),
     path('', include('storeapp.urls')),
     path('', include('customer.urls')),
-    # path('', include('shopkeeper.urls')),
+    path('', include('shopkeeper.urls')),
 ]

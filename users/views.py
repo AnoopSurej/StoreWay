@@ -62,7 +62,7 @@ def shopkeeper_login(request):
 
 			if user is not None:
 				login(request, user)
-				return redirect("customer-dashboard")
+				return redirect("shopkeeper-dashboard")
 	else:
 		form = ShopkeeperLoginForm()
 		context["shopkeeper_login_form"] = form
@@ -101,5 +101,10 @@ def customer_dashboard(request):
 
 def customer_logout(request):
 	logout(request)
-	return redirect('customer-register')
+	return redirect('storeapp-index')
+
+
+def shopkeeper_logout(request):
+	logout(request)
+	return redirect('storeapp-index')
 
