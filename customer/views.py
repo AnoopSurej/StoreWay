@@ -36,7 +36,26 @@ def customer_dashboard(request):
 
 def customer_search(request):
     current_user = request.user
-    context = {'shops':Shops.objects.all()}
+    searchterm = request.POST.get('searchterm')
+    context = {}
+    print(searchterm)
+    if(searchterm=="" or searchterm is None):
+        context = {'shops':Shops.objects.all()}
+    else:
+        list_of_ids = []
+        id_shopname = Shops.objects.filter(shop_name__icontains=searchterm)
+        id_district = Shops.objects.filter(district__icontains=searchterm)
+        id_localbody = Shops.objects.filter(localbody__icontains=searchterm)
+        for query in id_shopname:
+            list_of_ids.append(query.shopkeeper_email)
+        for query in id_district:
+            list_of_ids.append(query.shopkeeper_email)
+        for query in id_localbody:
+            list_of_ids.append(query.shopkeeper_email)
+        list_of_ids = list(set(list_of_ids))
+        entries = Shops.objects.filter(shopkeeper_email__in=list_of_ids)
+        context['shops']=entries
+
 
     return render(request,'customer/customer_search.html',context)
 

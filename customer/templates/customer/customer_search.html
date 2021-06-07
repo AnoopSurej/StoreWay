@@ -83,7 +83,13 @@
 {% endif %}
 
      <h1 style="text-align: center; padding: 10px; font-size: 30px; font-weight: bold;">Search</h1>
-
+     <div>
+     	<form style="margin-right: 500px; margin-left: 500px; margin-top: 40px" method="post" action="/csearch">
+     		{% csrf_token %}
+     		<input style="margin: 0 auto;" type="text" name="searchterm">
+     		<button type="submit">Search</button>
+     	</form>
+     </div>
   <div>
     <table style="margin: 0 auto; width: 60%; font-size: 23px;">
       <tr>
