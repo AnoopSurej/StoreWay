@@ -89,10 +89,14 @@ def shop_dummy(request):
 
         closing_time = shop.closing_time
 
+        q_slot_time = shop.q_slot_time
+
+        q_slot_capacity = shop.q_slot_capacity
+
         open_datetime = datetime(2000,1,1,hour=opening_time.hour,minute=opening_time.minute)
         close_datetime = datetime(2000,1,1,hour=closing_time.hour,minute=closing_time.minute)
 
-        tdelta = timedelta(minutes=15)
+        tdelta = timedelta(minutes=q_slot_time)
 
         temp = open_datetime
 
@@ -106,7 +110,7 @@ def shop_dummy(request):
         temp = slot_times
 
         for i in temp:
-            if(CustomerQueue.objects.filter(shopkeeper_email = shopemail, queueTimeSlot = i).count()>=5):
+            if(CustomerQueue.objects.filter(shopkeeper_email = shopemail, queueTimeSlot = i).count()>=q_slot_capacity):
                 slot_times.remove(i)
 
         slot_times_formatted = [i.strftime("%H:%M") for i in slot_times]

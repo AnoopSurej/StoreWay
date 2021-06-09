@@ -54,7 +54,11 @@ class ShopDetailRegistrationForm(forms.ModelForm):
 	class Meta:
 		model = Shops
 		fields = ('shop_name','shop_type','address','district','localbody','wardnum','opening_time','closing_time','q_slot_time','q_slot_capacity','description')
-
+		widgets = {
+		'opening_time':forms.TextInput(attrs={'placeholder':'HH:MM 24 Hour Clock'}),
+		'closing_time':forms.TextInput(attrs={'placeholder':'HH:MM 24 Hour Clock'}),
+		'q_slot_time':forms.TextInput(attrs={'placeholder':'Minutes'})
+		}
 
 
 

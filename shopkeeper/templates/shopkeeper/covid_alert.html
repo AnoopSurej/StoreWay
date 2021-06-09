@@ -100,8 +100,8 @@
           <td>{{entry.customerLastName}}</td>
           <td>{{entry.customerPhone}}</td>
           <td>{{entry.dateEntry|date:'d-m-Y'}}</td>
-          <td>{{entry.queueTimeSlot|time:"h:i"}}</td>
-          <td><a href="/covidalertnotif?timeslot={{entry.queueTimeSlot|time:'h:i'}}&phone={{entry.customerPhone}}&date={{entry.dateEntry|date:'d-m-Y'}}">Alert</a></td>
+          <td>{{entry.queueTimeSlot|time:"H:i"}}</td>
+          <td><a href="/covidalertnotif?timeslot={{entry.queueTimeSlot|time:'H:i'}}&phone={{entry.customerPhone}}&date={{entry.dateEntry|date:'d-m-Y'}}">Alert</a></td>
       </tr>
       {% endfor %}
     </table>

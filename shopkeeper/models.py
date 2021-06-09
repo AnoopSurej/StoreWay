@@ -22,7 +22,7 @@ class ShopRegistry(models.Model):
 	customerFirstName = models.CharField(max_length=20)
 	customerLastName = models.CharField(max_length=20)
 	customerPhone = models.CharField(max_length=10)
-	dateEntry = models.DateTimeField(auto_now=True)
+	dateEntry = models.DateTimeField()
 	queueTimeSlot = models.TimeField()
 	shopEnterTime = models.TimeField(auto_now=True)
 

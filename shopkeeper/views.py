@@ -40,15 +40,19 @@ def qr_scan(request):
 	            print("Here D")
 	            print(semail)
 	            print(current_shopkeeper_email)
+	            tday = datetime.datetime.now()
+	            tday_clean = datetime.datetime(tday.year,tday.month,tday.day,0,0)
 	            if(semail==current_shopkeeper_email):
 	            	print("here1")
-	            	if(ShopRegistry.objects.filter(shopkeeper_email=semail,customerFirstName=cfirstname,customerLastName=clastname,customerPhone=cphone,queueTimeSlot=qslot).count()<1):
+	            	if(ShopRegistry.objects.filter(shopkeeper_email=semail,customerFirstName=cfirstname,customerLastName=clastname,customerPhone=cphone,queueTimeSlot=qslot,dateEntry=tday_clean).count()<1):
 	            		print("here2")
-	            		obj = ShopRegistry(shopkeeper_email=semail,customerFirstName=cfirstname,customerLastName=clastname,customerPhone=cphone,queueTimeSlot=qslot)
+	            		obj = ShopRegistry(shopkeeper_email=semail,customerFirstName=cfirstname,customerLastName=clastname,customerPhone=cphone,queueTimeSlot=qslot,dateEntry=tday_clean)
 	            		obj.save()
 	            		context['status']="Scan Successful! Entry Added!"
 	            	else:
 	            		context['status']="Scan Successful! Entry Not Added As It Already Exists"
+	            		print(tday_clean)
+	            		print(type(tday_clean))
 	            else:
 	            	context['status'] = "Scan Successful! WRONG STORE"
 
@@ -88,13 +92,12 @@ def covid_alert(request):
 
 def covid_alert_notif(request):
 	slot = request.GET.get('timeslot')
+	print(slot)
 	date = request.GET.get('date')
 	val = date.split("-")
 	val_int = [int(i) for i in val]
 	val_int = val_int[::-1]
-	print(val_int)
 	datetimeobj = datetime.datetime(val_int[0],val_int[1],val_int[2])
-	print(slot)
 	shopkeeper = request.user
 	semail = shopkeeper.email
 	phone = request.GET.get('phone')
@@ -103,24 +106,41 @@ def covid_alert_notif(request):
 		print("Error")
 		return render(request,"shopkeeper/shopkeeper_dashboard.html")
 	else:
-		customer = StoreWayUser.objects.get(phone=phone)
-		cemail = customer.email
+		# customer = StoreWayUser.objects.get(phone=phone)
+		# cemail = customer.email
 		shop = Shops.objects.get(shopkeeper_email=semail)
 		shopname = shop.shop_name
 
-		obj = CovidAlert(customerEmail=cemail,shop_name=shopname, date=datetimeobj)
+		user_test = ShopRegistry.objects.get(customerPhone=phone)
 
-		obj.save()
+		print(user_test.queueTimeSlot)
 
-		others = ShopRegistry.objects.filter(queueTimeSlot=slot).exclude(customerPhone=phone)
+		# obj = CovidAlert(customerEmail=cemail,shop_name=shopname, date=datetimeobj)
 
-		for i in others:
-			customer = StoreWayUser.objects.get(phone=i.phone)
+		# obj.save()
+
+		# others = ShopRegistry.objects.filter(queueTimeSlot=slot).exclude(customerPhone=phone)
+
+		# for i in others:
+		# 	customer = StoreWayUser.objects.get(phone=i.customerPhone)
+		# 	cemail = customer.email
+
+		# 	obj = CovidAlert(customerEmail=cemail,shop_name=shopname,date=datetimeobj)
+
+		# 	obj.save()
+
+		covid = ShopRegistry.objects.filter(shopkeeper_email=semail,queueTimeSlot=slot,dateEntry=datetimeobj)
+
+		print(covid)
+
+		for i in covid:
+			customer = StoreWayUser.objects.get(phone=i.customerPhone)
 			cemail = customer.email
 
-			obj = CovidAlert(customerEmail=cemail,shop_name=shopname,date=datetimeobj)
+			print(cemail)
+
+			obj = CovidAlert(customerEmail=cemail, shop_name=shopname, date = datetimeobj)
 
 			obj.save()
-
 
 		return render(request,"shopkeeper/shopkeeper_dashboard.html")
