@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from users.forms import CustomerRegistrationForm, CustomerLoginForm, ShopkeeperLoginForm, ShopkeeperRegistrationForm, ShopDetailRegistrationForm
 from django.contrib.auth import authenticate, login, logout
 from shopkeeper.models import Shops
-
+from django.forms import ValidationError
 
 def customer_register(request):
 	context = {}
@@ -30,6 +31,12 @@ def customer_login(request):
 			if user is not None:
 				login(request, user)
 				return redirect("customer-dashboard")
+			else:
+				messages.info(request, 'User does not exist')
+				return redirect("customer-login")
+		else:
+			messages.info(request, 'User does not exist')
+			return redirect("customer-login")
 	else:
 		form = CustomerLoginForm()
 		context["customer_login_form"] = form

@@ -12,6 +12,7 @@ import qrcode.image.svg
 def customer_dashboard(request):
     current_user = request.user
     context={}
+    context['user']=current_user
     covid = False
 
     if(CovidAlert.objects.filter(customerEmail=current_user.email,is_read=False).count()>=1):
@@ -43,6 +44,7 @@ def customer_search(request):
         context = {'shops':Shops.objects.all()}
     else:
         list_of_ids = []
+        id_shoptype = Shops.objects.filter(shop_type__icontains=searchterm)
         id_shopname = Shops.objects.filter(shop_name__icontains=searchterm)
         id_district = Shops.objects.filter(district__icontains=searchterm)
         id_localbody = Shops.objects.filter(localbody__icontains=searchterm)
@@ -51,6 +53,8 @@ def customer_search(request):
         for query in id_district:
             list_of_ids.append(query.shopkeeper_email)
         for query in id_localbody:
+            list_of_ids.append(query.shopkeeper_email)
+        for query in id_shoptype:
             list_of_ids.append(query.shopkeeper_email)
         list_of_ids = list(set(list_of_ids))
         entries = Shops.objects.filter(shopkeeper_email__in=list_of_ids)

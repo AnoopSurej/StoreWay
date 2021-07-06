@@ -91,9 +91,10 @@
      	</form>
      </div>
   <div>
-    <table style="margin: 0 auto; width: 60%; font-size: 23px;">
+    <table style="margin: 0 auto; width: 80%; font-size: 23px; margin-bottom: 60px;">
       <tr>
 				<th>Shop Name</th>
+        <th>Type</th>
 				<th>Opening Time</th>
 				<th>Closing Time</th>
 				<th>Location</th>
@@ -101,6 +102,7 @@
 			{% for shop in shops %}
 			<tr>
 					<td> <a href="/shopdummy?shopname={{shop.shop_name}}"> {{shop.shop_name}} </a> </td>
+          <td>{{shop.shop_type}}</td>
 					<td>{{shop.opening_time}}</td>
 					<td>{{shop.closing_time}}</td>
 					<td>{{shop.localbody}}, {{shop.district}}</td>

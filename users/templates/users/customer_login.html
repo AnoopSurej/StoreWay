@@ -74,19 +74,19 @@
        </div>
      </div>
      <!-- end header inner -->
+
+<div class="text-bg pb-3">
+  <center>
+    <span style="padding-top: 20px; padding-bottom: 20px;">
+      Customer Login
+    </span>
 {% if messages %}
   {% for message in messages %}
-    <div class="alert alert-{{message.tag}}">
+    <div class="alert alert-{{message.tag}}" style="background-color: #ff7171; text-align: center; padding-left: 50px; padding-right: 50px; padding-top: 10px; padding-bottom: 10px; color: white; font-weight: bold; font-size: 20">
       {{ message }}
     </div>
   {% endfor %}
 {% endif %}
-<div class="text-bg pb-3">
-  <center>
-    <span>
-      Customer Login
-    </span>
-    
   </center>
 </div>
 <div class="card rounded pl-5">

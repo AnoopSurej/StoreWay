@@ -50,62 +50,62 @@
             <div class="col-xl-2 col-lg-4 col-md-4 col-sm-3 col logo_section">
               <div class="full">
                 <div class="center-desk">
-<div class="logo">
-                  <img src="{% static 'storeapp/images/StoreWayLogo.png' %}">
+                  <div class="logo">
+                    <img src="{% static 'storeapp/images/StoreWayLogo.png' %}">
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-xl-10 col-lg-8 col-md-8 col-sm-9">
-         
-               <div class="menu-area">
-                <div class="limit-box">
-                  <nav class="main-menu ">
-                    <ul class="menu-area-main">
-                      <li> <a href="/sdashboard">Dashboard</a> </li>
-                      <li> <a href="/slogout">Log Out</a> </li>
-                     </ul>
-                   </nav>
-                 </div>
-               </div> 
+             
+             <div class="menu-area">
+              <div class="limit-box">
+                <nav class="main-menu ">
+                  <ul class="menu-area-main">
+                    <li> <a href="/sdashboard">Dashboard</a> </li>
+                    <li> <a href="/slogout">Log Out</a> </li>
+                  </ul>
+                </nav>
               </div>
-           </div>
-         </div>
-       </div>
-     </div>
-    </header>
-     <!-- end header inner -->
-{% if messages %}
-  {% for message in messages %}
-    <div class="alert alert-{{message.tag}}">
-      {{ message }}
+            </div> 
+          </div>
+        </div>
+      </div>
     </div>
-  {% endfor %}
+  </div>
+</header>
+<!-- end header inner -->
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{message.tag}}">
+  {{ message }}
+</div>
+{% endfor %}
 {% endif %}
 
-     <h1 style="text-align: center; padding: 10px; font-size: 30px; font-weight: bold;">COVID Positive Alert</h1>
+<h1 style="text-align: center; padding: 10px; font-size: 30px; font-weight: bold;">COVID Positive Alert</h1>
 
-  <div>
-    <table style="margin: 0 auto; width: 60%; font-size: 23px">
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Phone Number</th>
-        <th>Date</th>
-        <th>Time Slot</th>
-      </tr>
-      {% for entry in entries %}
-      <tr class='clickable-row' data-href='#'>
-          <td>{{entry.customerFirstName}} </a> </td>
-          <td>{{entry.customerLastName}}</td>
-          <td>{{entry.customerPhone}}</td>
-          <td>{{entry.dateEntry|date:'d-m-Y'}}</td>
-          <td>{{entry.queueTimeSlot|time:"H:i"}}</td>
-          <td><a href="/covidalertnotif?timeslot={{entry.queueTimeSlot|time:'H:i'}}&phone={{entry.customerPhone}}&date={{entry.dateEntry|date:'d-m-Y'}}">Alert</a></td>
-      </tr>
-      {% endfor %}
-    </table>
-  </div>
+<div>
+  <table style="margin: 0 auto; width: 60%; font-size: 23px">
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone Number</th>
+      <th>Date</th>
+      <th>Time Slot</th>
+    </tr>
+    {% for entry in entries %}
+    <tr class='clickable-row' data-href='#'>
+      <td>{{entry.customerFirstName}} </a> </td>
+      <td>{{entry.customerLastName}}</td>
+      <td>{{entry.customerPhone}}</td>
+      <td>{{entry.dateEntry|date:'d-m-Y'}}</td>
+      <td>{{entry.queueTimeSlot|time:"H:i"}}</td>
+      <td><a href="/covidalertnotif?timeslot={{entry.queueTimeSlot|time:'H:i'}}&phone={{entry.customerPhone}}&date={{entry.dateEntry|date:'d-m-Y'}}">Alert</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
 
 
 

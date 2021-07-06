@@ -7,7 +7,11 @@ import datetime
 import cv2
 
 def shopkeeper_dashboard(request):
-	return render(request, 'shopkeeper/shopkeeper_dashboard.html')
+	current_shopkeeper = request.user
+	context = {
+	'user':current_shopkeeper
+	}
+	return render(request, 'shopkeeper/shopkeeper_dashboard.html',context)
 
 def qr_scan(request):
 	context = {}
