@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Model
 from users.models import StoreWayUser
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 class Shops(models.Model):
@@ -30,3 +31,13 @@ class ContainmentZone(models.Model):
 	district = models.CharField(max_length=30)
 	localbody = models.CharField(max_length=30)
 	wardnum = models.IntegerField()
+
+class ShopItems(models.Model):
+	shopkeeper_email = models.EmailField()
+	item_name=models.CharField(max_length=120)
+	item_price=models.FloatField()
+	item_quantity=models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(25)])
+	item_description=models.TextField(blank=True)
+
+	def __str__(self):
+		return self.shopkeeper_email

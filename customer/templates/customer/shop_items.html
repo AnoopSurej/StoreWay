@@ -74,55 +74,35 @@
        </div>
      </div>
     </header>
-     <!-- end header inner -->
-{% if messages %}
-  {% for message in messages %}
-    <div class="alert alert-{{message.tag}}">
-      {{ message }}
+    {% for shop in shops %}
+  <form method="POST">
+    {% csrf_token %}
+    <div class="card">
+      <div class="card-header">
+        {{shop.item_name}}
+      </div>
+      <div class="card-body">
+        <p class="card-text">Item Price :{{shop.item_price}} </p>
+        <p class="card-text">Item Quantity :{{shop.item_quantity}} </p>
+        <p class="card-text">Item Description :{{shop.item_description}} </p>
+       <!-- <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+        <input type="hidden" value={{shop.shopkeeper_email}} name="shopkeeper_email">
+        <input type="hidden" value={{shop.item_name}} name="item_name">
+        <input type="hidden" value={{shop.item_price}} name="item_price">
+        <input type="hidden" value={{shop.item_quantity}} name="item_quantity">
+        <button style="padding: 10px; border-color: black; font-weight: bold;" formaction="shopitems">Buy Online</button>
+      </div>
     </div>
-  {% endfor %}
-{% endif %}
-
-     <h1 style="text-align: center; padding: 10px; font-size: 30px; font-weight: bold;">Store</h1>
-
-     {%if status %}
-
-     	<h3 style="color: red; text-align: center; font-size: 25px;">THIS STORE IS IN A CONTAINMENT ZONE</h3>
-
-     {% endif %}
-
-	<div style="justify-content: center; text-align: center;">
-<h1 style="font-weight: bold; font-size: 40px;">{{shop.shop_name}}</h1>
-  <p style="padding: 10px; color: black; font-size: 25px;">Type: {{shop.shop_type}}</p>
-	<p style="padding: 10px; color: black; font-size: 25px;">Address: {{shop.address}}</p>
-	<p style="color: black; font-size: 25px;">Phone: {{sphone}}</p>
-	<p style="color: black; font-size: 25px;">Opening Time: {{shop.opening_time}} | Closing Time: {{shop.closing_time}}</p>
-	<br>
-	<h4 style="font-size: 25px;">Description</h4>
-	<p style="color: black; font-size: 25px; margin-left: 10%; margin-right: 10%" >
-		{{shop.description}}
-	</p>
-	<br>
-	<p>
-		<form method="GET">
-			<input type="hidden" value={{shop.shopkeeper_email}} name="shopemail">
-			<label for="slot" style="font-size: 20px">Choose a slot: </label>
-			<select style="width: 20%; font-size: 20px" class="hey" name="slot" required>
-					{%for i in slot_times_formatted%}
-				  <option value="{{i}}">{{i}}</option>
-				    {% endfor %}
-			</select>
-			<button style="padding: 10px; border-color: black; font-weight: bold;" formaction="qrcode">Submit</button>
-		</form>
-	</p>
-  <form method="GET">
-    <input type="hidden" value={{shop.shopkeeper_email}} name="shopemail">
-    <button style="padding: 10px; border-color: black; font-weight: bold;" formaction="shopitems">Shop Online</button>
-    
   </form>
-  
+    {% endfor %}
+     <!-- end header inner -->
+     <form action="listaddress" class="inline">
+      <button class="float-left submit-button" style="padding: 10px; border-color: black; font-weight: bold;" >Done</button>
+  </form>
 
-	</div>
+  
+</div>
 
 
 <!-- Javascript files-->

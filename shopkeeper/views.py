@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import ShopRegistry
-from .models import Shops
-from customer.models import CovidAlert
+from .models import Shops,ShopItems
+from customer.models import CovidAlert,OrderHistory
 from users.models import StoreWayUser
+from .forms import AddItemForm
 import datetime
 import cv2
 
@@ -148,3 +149,43 @@ def covid_alert_notif(request):
 			obj.save()
 
 		return render(request,"shopkeeper/shopkeeper_dashboard.html")
+def  add_item(request):
+	form=AddItemForm()
+	current_shopkeeper = request.user
+	current_shopkeeper_email = current_shopkeeper.email
+	if request.method=="POST":
+		form=AddItemForm(request.POST)
+		if form.is_valid():
+			item_name=request.POST.get('item_name')
+			item_price=request.POST.get('item_price')
+			item_quantity=request.POST.get('item_quantity')
+			item_description=request.POST.get('item_description')
+			obj = ShopItems(shopkeeper_email=current_shopkeeper_email, item_name=item_name, item_price=item_price, item_quantity=item_quantity, item_description=item_description)
+			obj.save()
+			return render(request,"shopkeeper/shopkeeper_dashboard.html")
+
+	else:
+		return render(request,'shopkeeper/additems.html', {'form':form})
+	
+def list_items(request):
+	current_shopkeeper = request.user
+	current_shopkeeper_email = current_shopkeeper.email
+	item_list=ShopItems.objects.filter(shopkeeper_email__contains=current_shopkeeper_email)
+	print(item_list)
+
+	for i in item_list:
+		customer = ShopItems.objects.get(item_name=i.item_name)
+		cemail = customer.item_name
+		print(cemail)
+
+			
+	return render(request,"shopkeeper/listitems.html", {'item_list':item_list})
+
+def order_history(request):
+    
+		current_shopkeeper = request.user
+		shopkeeper_email = current_shopkeeper.email
+		entries=OrderHistory.objects.filter(shopkeeper_email=shopkeeper_email )
+		print(entries)
+		return render(request,"shopkeeper/orderhistory.html", {'entries':entries})
+	

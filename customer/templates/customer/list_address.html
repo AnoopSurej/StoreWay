@@ -74,55 +74,48 @@
        </div>
      </div>
     </header>
+  
      <!-- end header inner -->
-{% if messages %}
-  {% for message in messages %}
-    <div class="alert alert-{{message.tag}}">
-      {{ message }}
-    </div>
+   
+  
+</div>
+{% if entries %}
+  {% for entry in addr %}
+    
+      <div class="card">
+        <form method="POST" action="addaddress">
+          {% csrf_token %}
+        <div class="card-header">
+          Delivery Address
+        </div>
+        <div class="card-body">
+            <p class="card-text">Address :{{entry.delivery_address}} </p>
+            <p class="card-text">Pincode :{{entry.delivery_pin}} </p>
+            <p class="card-text">District :{{entry.delivery_district}} </p>
+          <!-- <input type="hidden" value={{shop.shopkeeper_email}} name="shopkeeper_email">
+            <input type="hidden" value={{shop.item_name}} name="item_name">
+            <input type="hidden" value={{shop.item_price}} name="item_price">
+            <
+            
+          <a href="#" class="btn btn-primary">Go somewhere</a>-->
+          <input type="hidden" value={{entries}} name="count">
+          <button style="padding: 10px; border-color: black; font-weight: bold;" >Change Delivery Address</button>
+        </form>
+        <button style="padding: 10px; border-color: black; font-weight: bold;" > <a href="/cdashboard">Confirm Delivery Address</a></button>
+        </div>
+      </div>
+    
   {% endfor %}
+  
+{% else %}
+  <h1> delivery address is not added!!</h1>
+  <form  method="POST" action="addaddress" class="inline">
+    {% csrf_token %}
+    <input type="hidden" value={{entries}} name="count">
+    <button class="float-left submit-button" style="padding: 10px; border-color: black; font-weight: bold;" >Add delivery address</button>
+  </form>
 {% endif %}
 
-     <h1 style="text-align: center; padding: 10px; font-size: 30px; font-weight: bold;">Store</h1>
-
-     {%if status %}
-
-     	<h3 style="color: red; text-align: center; font-size: 25px;">THIS STORE IS IN A CONTAINMENT ZONE</h3>
-
-     {% endif %}
-
-	<div style="justify-content: center; text-align: center;">
-<h1 style="font-weight: bold; font-size: 40px;">{{shop.shop_name}}</h1>
-  <p style="padding: 10px; color: black; font-size: 25px;">Type: {{shop.shop_type}}</p>
-	<p style="padding: 10px; color: black; font-size: 25px;">Address: {{shop.address}}</p>
-	<p style="color: black; font-size: 25px;">Phone: {{sphone}}</p>
-	<p style="color: black; font-size: 25px;">Opening Time: {{shop.opening_time}} | Closing Time: {{shop.closing_time}}</p>
-	<br>
-	<h4 style="font-size: 25px;">Description</h4>
-	<p style="color: black; font-size: 25px; margin-left: 10%; margin-right: 10%" >
-		{{shop.description}}
-	</p>
-	<br>
-	<p>
-		<form method="GET">
-			<input type="hidden" value={{shop.shopkeeper_email}} name="shopemail">
-			<label for="slot" style="font-size: 20px">Choose a slot: </label>
-			<select style="width: 20%; font-size: 20px" class="hey" name="slot" required>
-					{%for i in slot_times_formatted%}
-				  <option value="{{i}}">{{i}}</option>
-				    {% endfor %}
-			</select>
-			<button style="padding: 10px; border-color: black; font-weight: bold;" formaction="qrcode">Submit</button>
-		</form>
-	</p>
-  <form method="GET">
-    <input type="hidden" value={{shop.shopkeeper_email}} name="shopemail">
-    <button style="padding: 10px; border-color: black; font-weight: bold;" formaction="shopitems">Shop Online</button>
-    
-  </form>
-  
-
-	</div>
 
 
 <!-- Javascript files-->

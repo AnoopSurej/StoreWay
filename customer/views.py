@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from shopkeeper.models import Shops
 from users.models import StoreWayUser
-from customer.models import CustomerQueue, CovidAlert
+from customer.models import CustomerQueue, CovidAlert, DeliveryAddress, OrderHistory
 from shopkeeper.models import ShopRegistry
-from shopkeeper.models import ContainmentZone
+from shopkeeper.models import ContainmentZone,ShopItems
 from io import BytesIO
-from datetime import datetime, timedelta
+from datetime import date,datetime, timedelta
+from .forms import DeliveryAddressForm
 import qrcode
 import qrcode.image.svg
 
@@ -181,3 +182,106 @@ def confirm_alert(request):
     obj.update(is_read=True)
 
     return render(request,"customer/customer_dashboard.html")
+
+def shop_items(request):
+    current_customer = request.user
+    customer_email = current_customer.email
+    customerFirstName = current_customer.first_name
+    customerLastName = current_customer.last_name
+    if request.method=='GET':
+        shopemail = request.GET.get('shopemail')
+        print(shopemail)
+        shops=ShopItems.objects.filter(shopkeeper_email__contains=shopemail)
+    if request.method=='POST':
+        #form=OrderHistoryForm()
+        shopemail = request.POST.get('shopkeeper_email')
+        item_name=request.POST.get('item_name')
+        item_price=request.POST.get('item_price')
+        item_quantity=request.POST.get('item_quantity')
+        if int(item_quantity)==1:
+            obj=ShopItems.objects.filter(shopkeeper_email=shopemail, item_name=item_name)
+            print(obj)
+            obj.delete()
+        else:
+            item_quantity=int(item_quantity)-1
+            ShopItems.objects.filter(shopkeeper_email=shopemail, item_name=item_name).update(item_quantity=item_quantity)
+        shop = Shops.objects.get(shopkeeper_email=shopemail)
+        shopname = shop.shop_name
+        tday = datetime.now()
+        tday_clean = datetime(tday.year,tday.month,tday.day,0,0)
+        obj = OrderHistory(customerEmail=customer_email, customerFirstName=customerFirstName, customerLastName=customerLastName, shopkeeper_email=shopemail, shop_name=shopname, item_name=item_name, item_price=item_price, currentdate=tday_clean)
+        obj.save()
+        
+        shops=ShopItems.objects.filter(shopkeeper_email__contains=shopemail)
+        #return render(request,"customer/shop_items.html", {'shops':shops})
+
+    return render(request,"customer/shop_items.html", {'shops':shops})
+
+
+def order_history(request):
+    
+    current_customer = request.user
+    customer_email = current_customer.email
+    entries=OrderHistory.objects.filter(customerEmail=customer_email )
+    print(entries)
+    return render(request,"customer/orderhistory.html", {'entries':entries})
+
+def list_address(request):
+    if request.method=='GET':
+        current_customer = request.user
+        customer_email = current_customer.email
+        entries=DeliveryAddress.objects.filter(customerEmail=customer_email ).count()
+        print(entries)
+        if entries==0:
+            return render(request,"customer/list_address.html",{'entries':entries})
+        else:
+            addr=DeliveryAddress.objects.filter(customerEmail=customer_email )
+            return render(request,"customer/list_address.html",{'entries':entries,'addr':addr})
+   # if request.method=='POST':
+    #    entries=request.POST.get('count')
+        #return render(request,"customer/add_address.html", {'entries':entries})
+
+def add_address(request):
+        form=DeliveryAddressForm()
+        current_customer = request.user
+        customer_email = current_customer.email
+        entries=DeliveryAddress.objects.filter(customerEmail=customer_email ).count()
+        print(entries)
+        if entries==0: 
+            if request.method=="POST":
+                form=DeliveryAddressForm(request.POST)
+                if form.is_valid():
+                    current_customer = request.user
+                    customer_email = current_customer.email
+                    delivery_address=request.POST.get('delivery_address')
+                    delivery_pin=request.POST.get('delivery_pin')
+                    delivery_district=request.POST.get('delivery_district')
+                    obj = DeliveryAddress(customerEmail=customer_email, delivery_address=delivery_address,delivery_pin =delivery_pin, delivery_district=delivery_district)
+                    obj.save()
+                    return render(request,"customer/customer_dashboard.html")
+                
+            else:
+                return render(request,'customer/add_address.html', {'form':form})
+    
+        else:
+            if request.method=="POST":
+                form=DeliveryAddressForm(request.POST)
+                if form.is_valid():
+                    current_customer = request.user
+                    customer_email = current_customer.email
+                    delivery_address=request.POST.get('delivery_address')
+                    delivery_pin=request.POST.get('delivery_pin')
+                    delivery_district=request.POST.get('delivery_district')
+                    DeliveryAddress.objects.filter(customerEmail=customer_email).update(delivery_address=delivery_address)
+                    delivery_pin=int(delivery_pin)
+                    DeliveryAddress.objects.filter(customerEmail=customer_email).update(delivery_pin=delivery_pin)
+                    DeliveryAddress.objects.filter(customerEmail=customer_email).update(delivery_district=delivery_district)
+                    return render(request,"customer/customer_dashboard.html")
+                else:
+                    form=DeliveryAddressForm()
+                    return render(request,'customer/add_address.html', {'form':form})
+            else:
+                form=DeliveryAddressForm()
+                return render(request,'customer/add_address.html', {'form':form})
+        return render(request,'customer/add_address.html', {'form':form})
+	    
