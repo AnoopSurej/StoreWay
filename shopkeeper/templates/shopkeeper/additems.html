@@ -75,8 +75,8 @@
      </div>
     </header>
      <!-- end header inner -->
-    
-    <form action="" method="POST">
+     <h1 style="text-align: center; padding: 10px; font-size: 30px; font-weight: bold;">Add Item</h1>
+    <form action="/additem" method="POST">
       {% csrf_token %}
         {{form.as_p}}
         <div class="pl-0 pb-2">

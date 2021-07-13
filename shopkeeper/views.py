@@ -156,13 +156,17 @@ def  add_item(request):
 	if request.method=="POST":
 		form=AddItemForm(request.POST)
 		if form.is_valid():
+			print("1")
 			item_name=request.POST.get('item_name')
 			item_price=request.POST.get('item_price')
 			item_quantity=request.POST.get('item_quantity')
 			item_description=request.POST.get('item_description')
 			obj = ShopItems(shopkeeper_email=current_shopkeeper_email, item_name=item_name, item_price=item_price, item_quantity=item_quantity, item_description=item_description)
 			obj.save()
+			print("2")
 			return render(request,"shopkeeper/shopkeeper_dashboard.html")
+		else:
+			return render(request,'shopkeeper/additems.html', {'form':form})
 
 	else:
 		return render(request,'shopkeeper/additems.html', {'form':form})

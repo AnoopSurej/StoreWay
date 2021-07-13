@@ -74,7 +74,7 @@
        </div>
      </div>
     </header>
-    <form method="POST">
+    <form method="POST" action="/addaddress">
       {% csrf_token %}
         {{form.as_p}}
         <div class="pl-0 pb-2">

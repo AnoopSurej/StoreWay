@@ -36,7 +36,7 @@ class ShopItems(models.Model):
 	shopkeeper_email = models.EmailField()
 	item_name=models.CharField(max_length=120)
 	item_price=models.FloatField()
-	item_quantity=models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(25)])
+	item_quantity=models.IntegerField()
 	item_description=models.TextField(blank=True)
 
 	def __str__(self):

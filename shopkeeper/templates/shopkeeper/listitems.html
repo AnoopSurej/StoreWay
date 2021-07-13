@@ -74,10 +74,11 @@
      </div>
     </header>
      <!-- end header inner -->
+     <h1 style="text-align: center; padding: 10px; font-size: 30px; font-weight: bold;">Added Items</h1>
      <div class="container">
       <div class="row ">
               {% for item in item_list%}
-              <div class="col-sm-4">
+              <div class="col-sm-4" style="margin-top: 40px;">
               <div class="card bg-light mb-3" style="max-width: 18rem;">
               <div class="card-header">{{item.item_name}}</div>
               <ul class="list-group list-group-flush">
